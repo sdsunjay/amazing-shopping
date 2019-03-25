@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Inventories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sku</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Color</th>
+      <th>Size</th>
+      <th>Weight</th>
+      <th>Price ($)</th>
+      <th>Cost ($)</th>
+      <th>Length</th>
+      <th>Width</th>
+      <th>Height</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inventories.each do |inventory| %>
+      <tr>
+        <td><%= link_to inventory.sku, inventory %></td>
+        <td><%= link_to inventory.product_id, product_path(inventory.product_id) %></td>
+        <td><%= inventory.quantity %></td>
+        <td><%= inventory.color %></td>
+        <td><%= inventory.size %></td>
+        <td><%= inventory.weight %></td>
+        <td><%= inventory.price_cents/100 %></td>
+        <td><%= inventory.cost_cents/100 %></td>
+        <td><%= inventory.length %></td>
+        <td><%= inventory.width %></td>
+        <td><%= inventory.height %></td>
+        <td><%= link_to 'Edit', edit_inventory_path(inventory) %></td>
+        <td><%= link_to 'Destroy', inventory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%== pagy_nav(@pagy) %>
+
+<%= link_to 'New Inventory', new_inventory_path %>

@@ -11,6 +11,8 @@ $ clone repo && cd amazing-shopping/
 $ bundle install
 $ rake db:create
 $ rake db:migrate
+$ cd lib && mkdir seeds
+$ cp ~/data/*.csv seeds/.
 $ rake db:seed
 ```
 

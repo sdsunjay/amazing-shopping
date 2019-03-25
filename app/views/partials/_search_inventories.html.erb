@@ -1,0 +1,7 @@
+<%= form_tag(inventories_path, method: 'get', id: 'search-form', class: "md-form form-sm form-2 pl-0", style: 'padding: 0; !important' )do %>
+    <div class='input-group'>
+     <%= text_field_tag :sku, nil, placeholder: 'SKU', class: 'form-control my-0 py-1' %>
+     <%= text_field_tag :product_id, nil, placeholder: 'Product ID', class: 'form-control my-0 py-1' %>
+    <%= button_tag raw('<span>SEARCH</span>'), name: nil, class:'input-group-text', 'data-text': 'SEARCH' %>
+    </div>
+  <% end %>

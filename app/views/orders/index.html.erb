@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Inventory</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Payment ref</th>
+      <th>Transaction ID</th>
+      <th>Total ($)</th>
+      <th>Tracking number</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= link_to order.product_id, product_path(order.product_id) %></td>
+        <td><%= link_to order.inventory_id, inventory_path(order.inventory_id) %></td>
+        <td><%= link_to order.name, order %></td>
+        <td><%= order.email %></td>
+        <td><%= order.status %></td>
+        <td><%= order.payment_ref %></td>
+        <td><%= order.transaction_id %></td>
+        <td><%= order.total_cents/100 %></td>
+        <td><%= order.tracking_number %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%== pagy_nav(@pagy) %>
+
+<%= link_to 'New Order', new_order_path %>

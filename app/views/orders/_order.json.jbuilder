@@ -1,0 +1,2 @@
+json.extract! order, :id, :product_id, :inventory_id, :street_address, :apartment, :city, :state, :country_code, :zip, :phone_number, :email, :name, :status, :payment_ref, :transaction, :payment_amt_cents, :ship_charged_cents, :shop_cost_cents, :subtotal_cents, :total_cents, :shipper_name, :payment_date, :shipped_date, :tracking_number, :tax_total_cents, :created_at, :updated_at
+json.url order_url(order, format: :json)

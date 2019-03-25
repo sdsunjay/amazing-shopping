@@ -1,24 +1,23 @@
 # README
+Amazing Shopping App
+====
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> ROR app for admin users view and manage inventory, orders, products for their online store.
 
-Things you may want to cover:
+### Getting started
 
-* Ruby version
+```
+$ clone repo && cd amazing-shopping/
+$ bundle install
+$ rake db:create
+$ rake db:migrate
+$ rake db:seed
+```
 
-* System dependencies
+### Technologies used
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Ruby 2.6.1
+- Rails 5.2
+- Devise for Authentication
+- Pagy for Pagination
+- Bootstrap for Beautification

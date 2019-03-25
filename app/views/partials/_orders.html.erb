@@ -1,0 +1,50 @@
+<!-- customer name, email address, product name, color, size, order_status, order total, transaction id, shipper (if applicable), tracking number (if applicable)-->
+<div class="accordion" id="accordion_orders">
+  <% orders.each do |order| %>
+    <div class="card">
+      <div class="card-header" id="heading_<%= order.id %>">
+        <h5 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_<%= order.id %>"  aria-expanded="true" aria-controls="collapse_<%= order.id %>"><%= order.product.name %> - <%= order.name %></button>
+        </h5>
+      </div>
+
+      <div id="collapse_<%= order.id %>" class="collapse" aria-labelledby="heading_<%= order.id %>" data-parent="#accordion_orders">
+        <div class="card-body">
+          <h6><%= link_to order.product.name, product_path(order.product.id), class: 'card-link' %></h6>
+          <ul class="list-group list-group-flush">
+          <% if order.name? %>
+            <li class="list-group-item">Name: <%= order.name %></li>
+          <% end %>
+          <% if order.email? %>
+            <li class="list-group-item">Email: <%= order.email %></li>
+          <% end %>
+          <% if order.status? %>
+            <li class="list-group-item">Status: <%= order.status %></li>
+          <% end %>
+          <% if order.total_cents? %>
+            <li class="list-group-item">Price: <%= order.total_cents/100 %></li>
+          <% end %>
+          <% if order.transaction_id? %>
+            <li class="list-group-item">Tracking ID: <%= order.transaction_id %></li>
+          <% end %>
+          <% if order.shipper_name? %>
+            <li class="list-group-item">Shipper: <%= order.shipper_name %></li>
+          <% end %>
+          <% if order.tracking_number? %>
+            <li class="list-group-item">Tracking Number: <%= order.tracking_number %></li>
+          <% end %>
+            <li class="list-group-item">Product ID: <%= link_to order.product_id, product_path(order.product_id) %></li>
+            <li class="list-group-item">Inventory ID: <%= link_to order.inventory_id, inventory_path(order.inventory_id) %></li>
+          </ul>
+          <hr>
+          <li class="list-group-item">Created At:
+            <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
+              <i class="fa fa-calendar"></i>
+              <%= order.created_at.strftime('%B %e at %l:%M %p' ) %>
+            </a>
+          </li>
+        </div><!-- card-body -->
+      </div><!-- collapse_product.id -->
+    </div><!-- card -->
+<% end %>
+</div><!-- accordion -->

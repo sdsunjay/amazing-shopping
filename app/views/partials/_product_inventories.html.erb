@@ -1,0 +1,9 @@
+<% inventories.each do |inventory| %>
+  <% if inventory.sku? %>
+    <p>SKU: <%= link_to inventory.sku, inventory_path(inventory.id) %></p>
+  <% end %>
+  <% if inventory.quantity? %>
+    <p>Quantity <%= inventory.quantity %> </p>
+  <% end %>
+  <hr>
+<% end %>

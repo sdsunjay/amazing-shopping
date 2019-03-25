@@ -1,0 +1,43 @@
+<!--  Product Name, sku, quantity, color, size, price and cost -->
+<div class="accordion" id="accordion_inventories">
+  <% inventories.each do |inventory| %>
+    <div class="card">
+      <div class="card-header" id="heading_<%= inventory.id %>">
+        <h5 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_<%= inventory.id %>"  aria-expanded="true" aria-controls="collapse_<%= inventory.id %>"><%= inventory.sku %></button>
+        </h5>
+      </div>
+
+      <div id="collapse_<%= inventory.id %>" class="collapse" aria-labelledby="heading_<%= inventory.id %>" data-parent="#accordion_inventories">
+        <div class="card-body">
+          <h6><%= link_to inventory.product.name, product_path(inventory.product.id), class: 'card-link' %></h6>
+          <ul class="list-group list-group-flush">
+          <% if inventory.quantity? %>
+            <li class="list-group-item">Quantity: <%= inventory.quantity %></li>
+          <% end %>
+          <% if inventory.color? %>
+            <li class="list-group-item">Color: <%= inventory.color %></li>
+          <% end %>
+          <% if inventory.size? %>
+            <li class="list-group-item">Size: <%= inventory.size %></li>
+          <% end %>
+          <% if inventory.price_cents? %>
+            <li class="list-group-item">Price: $<%= inventory.price_cents/100 %></li>
+          <% end %>
+          <% if inventory.cost_cents? %>
+            <li class="list-group-item">Cost: $<%= inventory.cost_cents/100 %></li>
+          <% end %>
+            <li class="list-group-item">Product ID: <%= link_to inventory.product_id, product_path(inventory.product_id) %></li>
+          </ul>
+          <hr>
+          <li class="list-group-item">Created At:
+            <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
+              <i class="fa fa-calendar"></i>
+              <%= inventory.created_at.strftime('%B %e at %l:%M %p' ) %>
+            </a>
+          </li>
+        </div><!-- card-body -->
+      </div><!-- collapse_product.id -->
+    </div><!-- card -->
+<% end %>
+</div><!-- accordion -->

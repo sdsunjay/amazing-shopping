@@ -8,12 +8,13 @@ class Order < ApplicationRecord
   def self.search(product_id, sku, user_id)
     # blank? covers both nil and empty string
     if product_id.present?
-      # select * from orders where product_id in (select id from products where user_id = user.id and id = product_id);
-      where(product_id: Product.where(user_id: user_id, id: product_id))
+      joins(:product).where(Product.arel_table[:user_id].eq(user_id).and(Product.arel_table[:id].eq(product_id)))
+      # where(product_id: Product.where(user_id: user_id, id: product_id))
     elsif sku.present?
-      # select * from orders where product_id in (select id from products where user_id = user.id) and
-      # inventory_id in (select product_id from inventories where sku = sku) ;
-      where(product_id: Product.where(user_id: user_id), inventory_id: Inventory.where(sku: sku))
+      joins(:product, :inventory).where(Product.arel_table[:user_id].eq(user_id).and(Inventory.arel_table[:sku].eq(sku)))
+      # where(product_id: Product.where(user_id: user_id), inventory_id: Inventory.where(sku: sku))
+    elsif user_id.present?
+      joins(:product).where(Product.arel_table[:user_id].eq(user_id))
     end
   end
 end

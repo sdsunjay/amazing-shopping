@@ -10,12 +10,14 @@ class Inventory < ApplicationRecord
   def self.search(product_id, sku, user_id)
     # blank? covers both nil and empty string
     if product_id.present?
-      # where(arel_table[:product_id].eq(product_id))
-      where(product_id: Product.where(user_id: user_id, id: product_id))
+      joins(:product).where(Product.arel_table[:user_id].eq(user_id).and(Product.arel_table[:id].eq(product_id)))
+      # where(product_id: Product.where(user_id: user_id, id: product_id))
     elsif sku.present?
-      where(product_id: Product.where(user_id: user_id), sku: sku)
-    else
-      where(product_id: Product.where(user_id: user_id))
+      joins(:product).where(Product.arel_table[:user_id].eq(user_id).and(Inventory.arel_table[:sku].eq(sku)))
+      # where(product_id: Product.where(user_id: user_id), sku: sku)
+    elsif user_id.present?
+      joins(:product).where(Product.arel_table[user_id].eq(user_id))
+      # where(product_id: Product.where(user_id: user_id))
     end
   end
 end

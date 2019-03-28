@@ -9,7 +9,8 @@ class Product < ApplicationRecord
   #def available?
   #  inventory.quantity > 0
   #end
-  enum product_type: { rumored: 1, planned: 2, in_production: 3, post_production: 4, clothing: 0, cancelled: 5 }
+  #
+  enum product_type: { accessories: 1, clothing: 0 }
 
   def self.search(pattern, user_id)
     # blank? covers both nil and empty string

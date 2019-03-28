@@ -1,6 +1,8 @@
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[show edit update destroy]
   before_action :set_user, only: %i[index new create show edit update destroy]
+  # if we had admin users
+  # before_action :check_admin_user, only: %i[edit update destroy]
 
   # GET /inventories
   # GET /inventories.json

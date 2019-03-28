@@ -16,7 +16,7 @@ class Inventory < ApplicationRecord
       joins(:product).where(Product.arel_table[:user_id].eq(user_id).and(Inventory.arel_table[:sku].eq(sku)))
       # where(product_id: Product.where(user_id: user_id), sku: sku)
     elsif user_id.present?
-      joins(:product).where(Product.arel_table[user_id].eq(user_id))
+      joins(:product).where(Product.arel_table[:user_id].eq(user_id))
       # where(product_id: Product.where(user_id: user_id))
     end
   end

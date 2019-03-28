@@ -10,13 +10,15 @@ class OrdersController < ApplicationController
     elsif params[:sku].present?
       @pagy, @orders = pagy(Order.search(nil, params[:sku], @user.id), items: 100)
     else
-      @pagy, @orders = pagy(Order.all, items: 100)
+      @pagy, @orders = pagy(Order.search(nil, nil, @user.id), items: 100)
     end
   end
 
   # GET /orders/1
   # GET /orders/1.json
-  def show; end
+  def show
+    @page_title = @order.name
+  end
 
   # GET /orders/new
   def new

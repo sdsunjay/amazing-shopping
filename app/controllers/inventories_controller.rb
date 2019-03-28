@@ -10,7 +10,7 @@ class InventoriesController < ApplicationController
     elsif params[:sku].present?
       @pagy, @inventories = pagy(Inventory.search(nil, params[:sku], @user.id), items: 100)
     else
-      @pagy, @inventories = pagy(Inventory.all, items: 100)
+      @pagy, @inventories = pagy(Inventory.search(nil, nil, @user.id), items: 100)
     end
   end
 

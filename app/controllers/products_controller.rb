@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     if params[:name].present?
       @pagy, @products = pagy(Product.search(params[:name], @user.id), items: 100)
     else
-      @pagy, @products = pagy(Product.all, items: 100)
+      @pagy, @products = pagy(Product.search(nil, @user.id), items: 100)
     end
   end
 

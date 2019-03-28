@@ -14,6 +14,7 @@ class Product < ApplicationRecord
 
   def self.search(pattern, user_id)
     # blank? covers both nil and empty string
+    # TODO: never return data if we dont have user_id
     if pattern.blank?
       where(arel_table[:user_id].eq(user_id))
     else

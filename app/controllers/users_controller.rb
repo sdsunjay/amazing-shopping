@@ -20,19 +20,19 @@ class UsersController < ApplicationController
                           else
                             Product.where(user_id: @user).count
                           end
-    @pagy_orders, @orders = pagy(Order.includes(:product).where(product_id: @products).order(created_at: :desc), page_param: :page_orders, params: { active_tab: 'orders-tab' })
+    @pagy_orders, @orders = pagy(Order.includes(:product).where(product_id: Product.where(user_id: @user)).order(created_at: :desc), page_param: :page_orders, params: { active_tab: 'orders-tab' })
     if @orders.blank?
       @number_of_orders = 0
       @total_sales = 0
       @avg_total = 0
     else
       # TODO: Fix this warning
-      @number_of_orders = Order.where(product_id: @products).count
-      @total_sales = Order.where(product_id: @products).sum(:total_cents)
-      @avg_sales = Order.where(product_id: @products).average(:total_cents).round(2)
+      @number_of_orders = Order.where(product_id: Product.where(user_id: @user)).count
+      @total_sales = Order.where(product_id: Product.where(user_id: @user)).sum(:total_cents)
+      @avg_sales = Order.where(product_id: Product.where(user_id: @user)).average(:total_cents).round(2)
     end
-    @pagy_inventories, @inventories = pagy(Inventory.includes(:product).where(product_id: @products).order(created_at: :desc), page_param: :page_inventories, params: { active_tab: 'inventories-tab' })
-    @inventory_count = Inventory.where(product_id: @products).count
+    @pagy_inventories, @inventories = pagy(Inventory.includes(:product).where(product_id: Product.where(user_id: @user)).order(created_at: :desc), page_param: :page_inventories, params: { active_tab: 'inventories-tab' })
+    @inventory_count = Inventory.where(product_id: Product.where(user_id: @user)).count
   end
 
   # GET /users/:id/edit
